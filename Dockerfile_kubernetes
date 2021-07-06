@@ -1,11 +1,11 @@
 
-FROM alpine:3.13.2 as kube
+FROM alpine:3.14.0 as kube
 ARG KUBECTL_VERSION
 RUN apk add wget \
   && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl
 
-FROM alpine:3.13.2 as helm
+FROM alpine:3.14.0 as helm
 ARG HELM_VERSION
 RUN apk add wget \
   && wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
@@ -13,25 +13,25 @@ RUN apk add wget \
 RUN helm repo add stable "https://charts.helm.sh/stable"
 RUN helm repo add bitnami "https://charts.bitnami.com/bitnami"
 
-FROM alpine:3.13.2 as authenticator
+FROM alpine:3.14.0 as authenticator
 ARG AWS_IAM_AUTHENTICATOR_VERSION
 RUN apk add wget \
   && wget -q https://amazon-eks.s3-us-west-2.amazonaws.com/${AWS_IAM_AUTHENTICATOR_VERSION}/bin/linux/amd64/aws-iam-authenticator -O /usr/local/bin/aws-iam-authenticator \
   && chmod +x /usr/local/bin/aws-iam-authenticator
 
-FROM alpine:3.13.2 as argo
+FROM alpine:3.14.0 as argo
 ARG ARGO_VERSION
 RUN apk add wget \
   && wget -q https://github.com/argoproj/argo/releases/download/${ARGO_VERSION}/argo-linux-amd64.gz -O - | gunzip -dc - > /usr/local/bin/argo \
   && chmod +x /usr/local/bin/argo
 
-FROM alpine:3.13.2 as render
+FROM alpine:3.14.0 as render
 ARG RENDER_VERSION
 RUN apk add curl \
   && curl -L -s https://github.com/VirtusLab/render/releases/download/${RENDER_VERSION}/render-linux-amd64 -o /usr/local/bin/render \
   && chmod +x /usr/local/bin/render
 
-FROM alpine:3.13.2 as tilt
+FROM alpine:3.14.0 as tilt
 ARG TILT_VERSION
 RUN apk add wget \
   && wget -q https://github.com/tilt-dev/tilt/releases/download/$TILT_VERSION/tilt.${TILT_VERSION//v}.linux.x86_64.tar.gz -O - | tar -xzO tilt > /usr/local/bin/tilt \

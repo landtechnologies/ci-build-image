@@ -1,5 +1,5 @@
 
-FROM alpine:3.13.2 as kops
+FROM alpine:3.14.0 as kops
 ARG VERSION
 RUN apk add curl \
   && curl -L -s https://github.com/kubernetes/kops/releases/download/${VERSION}/kops-linux-amd64 -o /usr/local/bin/kops \
