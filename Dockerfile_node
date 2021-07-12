@@ -1,4 +1,4 @@
-FROM node:14.15.5-alpine3.13
+FROM node:16.4.2-alpine3.13
 
 ENV PATH="./node_modules/.bin:${PATH}"
 ENV SHELL /bin/bash
